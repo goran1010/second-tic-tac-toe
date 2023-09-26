@@ -7,5 +7,51 @@
     <script src="main.js" defer></script>
     <title>Tic Tac Toe</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="set-up">
+        <div class="player-names">
+          <div class="player-x">
+            <label for="player-x-input">Player X name: </label>
+            <input type="text" id="player-x-input" placeholder="Player X" />
+          </div>
+          <div class="player-o">
+            <label for="player-o-input">Player O name: </label>
+            <input type="text" id="player-o-input" placeholder="Player O" />
+          </div>
+        </div>
+        <div class="swap">
+          <img src="img/swap_horiz_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+          <button class="swap-players">Swap Players' Turn</button>
+        </div>
+        <div class="buttons">
+          <div class="game">
+            <img src="img/group_FILL0_wght400_GRAD0_opsz24.svg" alt="" /><button
+              class="new-game"
+            >
+              New Two Player Game
+            </button>
+          </div>
+          <div class="ai">
+            <button class="new-ai-game">New Game against AI</button>
+            <img src="img/tv_signin_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="game-board">
+        <p class="announcements"></p>
+        <div class="board">
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+          <div class="element"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
