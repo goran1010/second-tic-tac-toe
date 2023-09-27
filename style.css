@@ -2,11 +2,15 @@
   font-family: Roboto;
   src: url(./fonts/Roboto/Roboto-Regular.ttf);
 }
+@font-face {
+  font-family: Handwritten;
+  src: url(fonts/fortune/Fortune.otf);
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-family: Roboto, Helvetica, sans-serif;
 }
 .container {
   display: flex;
@@ -18,6 +22,8 @@
 .game-board {
   display: flex;
   flex-direction: column;
+  user-select: none;
+  align-items: center;
 }
 .game-board > p {
   height: 2rem;
@@ -28,9 +34,10 @@
   background-color: black;
   display: grid;
   grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 .element {
+  font-family: Handwritten, Roboto, Helvetica, sans-serif;
   background-color: white;
   width: 7rem;
   height: 7rem;
@@ -38,12 +45,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .player-names {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+.player-names span {
+  font-family: Handwritten, Roboto, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 1.7rem;
 }
 label {
   white-space: nowrap;
@@ -126,4 +139,7 @@ button.swap-players:active {
   border: 2px solid black;
   background-color: rgb(212, 118, 3);
   color: lightgray;
+}
+button:hover {
+  border: 2px solid black;
 }
