@@ -179,7 +179,7 @@ button.reset-wins:active {
   color: lightgray;
 }
 div.element.win {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(182, 182, 182);
 }
 input[readonly] {
   background-color: rgb(189, 188, 188);
