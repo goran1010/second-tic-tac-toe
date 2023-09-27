@@ -11,6 +11,9 @@ allElements.forEach((element) => element.addEventListener(`click`, playSign));
 const newTwoPlayerButton = document.querySelector(`.new-game`);
 newTwoPlayerButton.addEventListener(`click`, newGame);
 
+const newAIGameButton = document.querySelector(`.ai`);
+newAIGameButton.addEventListener(`click`, newAIGame);
+
 const announcements = document.querySelector(".announcements");
 
 const resetWins = document.querySelector(`.reset-wins`);
@@ -51,6 +54,90 @@ playerOName.addEventListener(`keyup`, () => {
 
 const swapPlayers = document.querySelector(`.swap-players`);
 swapPlayers.addEventListener(`click`, () => {
+  if (playerX.name === "AI Player" || playerO.name === "AI Player") {
+    playerXName.readOnly = false;
+    playerOName.readOnly = false;
+
+    if (playerX.name === "Player X") {
+      playerO.name = "Player O";
+      playerOName.value = "";
+
+      playerX.name = "AI Player";
+      playerXName.value = "AI Player";
+      playerXName.readOnly = true;
+
+      let tempName = playerX.wins;
+      playerX.wins = playerO.wins;
+      playerO.wins = tempName;
+
+      tempName = playerXWins.textContent;
+      playerXWins.textContent = playerOWins.textContent;
+      playerOWins.textContent = tempName;
+
+      updateDisplay();
+      newAIGame();
+      return;
+    }
+    if (playerO.name === "Player O") {
+      playerX.name = "Player X";
+      playerXName.value = "";
+
+      playerO.name = "AI Player";
+      playerOName.value = "AI Player";
+      playerOName.readOnly = true;
+
+      let tempName = playerX.wins;
+      playerX.wins = playerO.wins;
+      playerO.wins = tempName;
+
+      tempName = playerXWins.textContent;
+      playerXWins.textContent = playerOWins.textContent;
+      playerOWins.textContent = tempName;
+
+      updateDisplay();
+      newAIGame();
+      return;
+    }
+    if (playerX.name === "AI Player") {
+      playerX.name = playerO.name;
+      playerO.name = "AI Player";
+
+      playerXName.value = playerOName.value;
+      playerOName.value = "AI Player";
+      playerOName.readOnly = true;
+
+      let tempName = playerX.wins;
+      playerX.wins = playerO.wins;
+      playerO.wins = tempName;
+
+      tempName = playerXWins.textContent;
+      playerXWins.textContent = playerOWins.textContent;
+      playerOWins.textContent = tempName;
+      updateDisplay();
+      newAIGame();
+      return;
+    }
+    if (playerO.name === "AI Player") {
+      playerO.name = playerX.name;
+      playerX.name = "AI Player";
+
+      playerOName.value = playerXName.value;
+      playerXName.value = "AI Player";
+      playerXName.readOnly = true;
+
+      let tempName = playerX.wins;
+      playerX.wins = playerO.wins;
+      playerO.wins = tempName;
+
+      tempName = playerXWins.textContent;
+      playerXWins.textContent = playerOWins.textContent;
+      playerOWins.textContent = tempName;
+      updateDisplay();
+      newAIGame();
+      return;
+    }
+  }
+
   newGame();
 
   if (playerX.name === "Player X" && playerO.name === "Player O") {
@@ -237,6 +324,7 @@ function gameDraw() {
 }
 
 function checkGameDraw() {
+  if (gameOver) return;
   for (let i = 0; i < gameBoard.board.length; i++) {
     if (gameBoard.board[i] === "") return false;
   }
@@ -252,23 +340,67 @@ function updateDisplay() {
   });
 }
 
+function randomMove() {
+  return availableBoard()[Math.floor(Math.random() * availableBoard().length)];
+}
+
+function availableBoard() {
+  let someBoard = [];
+
+  gameBoard.board.forEach((element, index) => {
+    if (element === ``) {
+      someBoard.push(index);
+    }
+  });
+
+  return someBoard;
+}
+
 function playSign() {
   if (gameOver) {
     return;
   }
+
   if (this.textContent) return;
 
   gameBoard.board[this.id] = gameBoard.currentPlayer.sign;
-
   checkGameWon();
   checkGameDraw();
 
-  if (gameOver) return;
+  if (gameOver) {
+    gameBoard.currentPlayer = playerX;
+    updateDisplay();
+    return;
+  }
   gameBoard.currentPlayer = nextPlayer();
   updateDisplay();
+  if (gameBoard.currentPlayer.name === "AI Player") {
+    gameBoard.board[randomMove()] = gameBoard.currentPlayer.sign;
+    checkGameWon();
+    checkGameDraw();
+
+    if (gameOver) {
+      gameBoard.currentPlayer = playerX;
+      updateDisplay();
+      return;
+    }
+    gameBoard.currentPlayer = nextPlayer();
+    updateDisplay();
+  }
 }
 
 function newGame() {
+  gameBoard.currentPlayer = playerX;
+  if (playerX.name === "AI Player") {
+    playerXName.readOnly = false;
+    playerX.name = "Player X";
+    playerXName.value = "";
+  }
+  if (playerO.name === "AI Player") {
+    playerOName.readOnly = false;
+    playerO.name = "Player O";
+    playerOName.value = "";
+  }
   gameOver = false;
 
   allElements.forEach((element) => {
@@ -279,6 +411,45 @@ function newGame() {
   gameBoard.currentPlayer = playerX;
 
   updateDisplay();
+}
+
+function newAIGame() {
+  gameBoard.currentPlayer = playerX;
+  gameOver = false;
+  gameBoard.board = ["", "", "", "", "", "", "", "", ""];
+
+  allElements.forEach((element) => {
+    element.classList.remove(`win`);
+  });
+  updateDisplay();
+  if (playerX.name === "AI Player" || playerO.name === "AI Player") {
+    gameBoard.currentPlayer = playerX;
+    if (gameBoard.currentPlayer.name === "AI Player") {
+      gameBoard.board[randomMove()] = gameBoard.currentPlayer.sign;
+      checkGameWon();
+      checkGameDraw();
+
+      if (gameOver) {
+        gameBoard.currentPlayer = playerX;
+        updateDisplay();
+        return;
+      }
+      gameBoard.currentPlayer = nextPlayer();
+      updateDisplay();
+      return;
+    } else return;
+  }
+
+  if (gameBoard.currentPlayer.sign === "X" && playerX.name != "AI Player") {
+    playerO.name = "AI Player";
+    playerOName.value = "AI Player";
+    playerOName.readOnly = true;
+  }
+  if (gameBoard.currentPlayer.sign === "O" && playerO.name != "AI Player") {
+    playerX.name = "AI Player";
+    playerXName.value = "AI Player";
+    playerXName.readOnly = true;
+  }
 }
 
 newGame();
