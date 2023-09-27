@@ -182,5 +182,5 @@ div.element.win {
   background-color: rgb(230, 230, 230);
 }
 input[readonly] {
-  background-color: lightgray;
+  background-color: rgb(189, 188, 188);
 }
