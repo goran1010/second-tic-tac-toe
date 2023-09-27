@@ -69,6 +69,13 @@ label {
 input {
   font-size: 1rem;
 }
+.wins {
+  width: 2rem;
+  border: 1px solid gray;
+  border-radius: 3px;
+  text-align: center;
+  user-select: none;
+}
 .set-up {
   display: flex;
   flex-direction: column;
@@ -77,12 +84,25 @@ input {
   flex-wrap: wrap;
   align-items: center;
 }
+.reset {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 .swap {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 .buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.swap-reset {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -98,6 +118,16 @@ input {
 }
 button {
   white-space: nowrap;
+}
+button.reset-wins {
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: red;
+  color: white;
+  border: 2px solid red;
+  border-radius: 5px;
+  font-weight: bold;
+  flex: 1;
 }
 button.swap-players {
   font-size: 1rem;
@@ -142,4 +172,12 @@ button.swap-players:active {
 }
 button:hover {
   border: 2px solid black;
+}
+button.reset-wins:active {
+  border: 2px solid black;
+  background-color: rgb(105, 1, 1);
+  color: lightgray;
+}
+div.element.win {
+  background-color: rgb(230, 230, 230);
 }

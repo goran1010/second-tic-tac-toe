@@ -19,15 +19,24 @@
           <div class="player-x">
             <label for="player-x-input">Player <span>X</span> name: </label>
             <input type="text" id="player-x-input" placeholder="Player X" />
+            <div class="wins" id="player-x-wins">0</div>
           </div>
           <div class="player-o">
             <label for="player-o-input">Player <span>O</span> name: </label>
             <input type="text" id="player-o-input" placeholder="Player O" />
+            <div class="wins" id="player-o-wins">0</div>
           </div>
         </div>
-        <div class="swap">
-          <img src="img/swap_horiz_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
-          <button class="swap-players">Swap Players' Turns</button>
+        <div class="swap-reset">
+          <div class="swap">
+            <img src="img/swap_horiz_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+            <button class="swap-players">Swap Players' Turns</button>
+          </div>
+          <div class="reset">
+            <img src="img/restart.svg" alt="" /><button class="reset-wins">
+              Reset Wins
+            </button>
+          </div>
         </div>
         <div class="buttons">
           <div class="game">
